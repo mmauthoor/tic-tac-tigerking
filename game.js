@@ -1,7 +1,6 @@
-// Questions: 
-// How will computer recognise when a win state has been achieved - i.e. that all noughts are in correct formation, or all crosses? 
 
-// Need ability for computer to tell when a win state has been reached, i.e. all of one type (image, etc.) in a row/column/diagonal, OR the grid is full. 
+
+
 // Need win state and lose state
 // Need restart ability
 
@@ -18,13 +17,15 @@
 // DOM objects
 let gridCells = document.querySelectorAll(".grid-cell");
 let gameStatusDiv = document.querySelector(".game-status-div");
+let restartBtn = document.querySelector(".restart-btn");
 
 // Functions that I'll need
 // toggle between players - DONE
 // Check if token already present in cell - DONE
 // Check if there are 3 or more of a player's tokens on the board - DONE
-// if so, are they in a single row/column/diagonal? 
+// if so, are they in a single row/column/diagonal? - DONE
 // Check if all the cells on the board are filled - DONE
+
 
 
 // Start game player status
@@ -34,6 +35,7 @@ function handlePlayerChoice(event) {
     let playerCellChoice = event.target;
     let playerCellClass = "";
     if (isCellVacant(playerCellChoice)) {
+        
         if (currentPlayer === "Player 1") {
             playerCellChoice.classList.add("joe-cell", "occupied");
             playerCellClass = ".joe-cell";
@@ -42,15 +44,21 @@ function handlePlayerChoice(event) {
             playerCellClass = ".carole-cell";
         }
         if (checkPlayerCellNumber(playerCellClass)) {
-            hasPlayerWon(playerCellClass, playerCellChoice);
-            // want to check if the current cell shares the same row/column as others of its type
+            if (hasPlayerWon(playerCellClass, playerCellChoice)) {
+                declareWinner(playerCellClass);
+                gameOver();
+            } else if (isBoardFull()) {
+                console.log("board is full - it's a tie");
+                gameOver();
+            } else {
+                togglePlayers();
+            }
+        } else {
+            togglePlayers();
         }
-
-
-        togglePlayers();
     } else {
         gameStatusDiv.textContent = `There's a tiger in this cage already! Choose a different one, ${currentPlayer}!`;
-    }
+        }
 }
 
 function togglePlayers() {
@@ -80,15 +88,12 @@ function checkPlayerCellNumber(playerCells) {
     }
 }
 
-function hasPlayerWon(playerCellClass, playerCellChoice) {
+function checkRowColWins(playerCellChoice, playerTotalCells) {
     let playerCellChoiceRow = playerCellChoice.dataset.row;
     let playerCellChoiceCol = playerCellChoice.dataset.col;
-    // console.log("The most recent cell placed was " + playerCellChoiceRow + playerCellChoiceCol );
 
-    let playerTotalCells = document.querySelectorAll(playerCellClass);
     let playerRowCounter = 0;
     let playerColCounter = 0;
-    
     // Could maybe swap out for a for each function??
     for (let i = 0; i < playerTotalCells.length; i++) {
         let currentCell = playerTotalCells[i];
@@ -104,53 +109,66 @@ function hasPlayerWon(playerCellClass, playerCellChoice) {
         }
     }
     if (playerRowCounter === 3 || playerColCounter === 3) {
-        declareWinner(playerCellClass);
-    } else {
-        // maybe could change to a forEach? 
-        for (let i = 0; i < playerTotalCells.length; i++) {
-            let currentCell = playerTotalCells[i];
-            let cellCoordinates = currentCell.dataset.row + currentCell.dataset.col; 
-            let middleCellCoordinates = "22";
-
-            if (cellCoordinates === middleCellCoordinates) {
-                let firstDiagonalCounter = 0;
-                let secondDiagonalCounter = 0;
-                for (i = 0; i < playerTotalCells.length; i++) {
-
-                }
-                console.log("we have a middle square");
-            }
-        }
-        // hard code if  cells are all in diagonal position. i.e. if in 11, 22, 33 OR 13, 22, 31
+        return true;
     }
 }
 
+function checkDiagonalWins(playerTotalCells) {
+    let cellCoordinateArray = [];
+    for (let i = 0; i < playerTotalCells.length; i++) {
+        let currentCell = playerTotalCells[i];
+        let cellCoordinates = currentCell.dataset.row + currentCell.dataset.col;
+        cellCoordinateArray.push(cellCoordinates); 
+        // console.log(cellCoordinateArray);
+        }
+        if (cellCoordinateArray.includes("11") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("33") || cellCoordinateArray.includes("13") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("31")) {
+            return true;
+        }
+}
+
+function hasPlayerWon(playerCellClass, playerCellChoice) {
+    let playerTotalCells = document.querySelectorAll(playerCellClass); 
+    if (checkRowColWins(playerCellChoice, playerTotalCells)) {
+        return true;
+    } else if (checkDiagonalWins(playerTotalCells)) {
+        return true;
+    } 
+}
 
 function declareWinner(winner) {
     if (winner === ".joe-cell") {
-        console.log("joe wins!!");
+        gameStatusDiv.textContent = "joe wins!!";
     // Special joe message here
     } else if (winner === ".carole-cell") {
         // if carole wins
-    console.log("carole wins!!");
+    gameStatusDiv.textContent = "carole wins!!";
     // Great job, you cool cats and kittens! vs I'm never going to financially recover from this
     }   
 }
 
 function isBoardFull() {
     let occupiedCells = document.querySelectorAll(".occupied");
-    console.log(occupiedCells);
-    if (occupiedCells.length === gridCells.length) {
-        console.log("No winner");
-    }
+    return occupiedCells.length === gridCells.length;
+}
+
+function gameOver() {
+    gridCells.forEach(cell => cell.classList.add("greyout-cell"));
+    alert("game over!")
+
+    // add overlay to all grid cells
+    // remove cliability for all cells but reactivate 
 }
 
 function handleRestart() {
     gridCells.forEach(cell => cell.classList.remove("joe-cell", "carole-cell", "occupied"));
+    // also remove greyed out sheet over them
+    currentPlayer = "Player 1";
+    // also add clickability back
 }
 
 
 // Event handlers
 gridCells.forEach(cell => cell.addEventListener("click", handlePlayerChoice));
+restartBtn.addEventListener("click", handleRestart);
 // Need a handler to click on restart button, start button
 

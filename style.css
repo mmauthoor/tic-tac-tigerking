@@ -39,6 +39,10 @@ header {
     text-align: center;
 }
 
+.restart-btn {
+
+}
+
 .game-grid {
     margin: 30px auto;
     max-width: 550px;
@@ -66,13 +70,19 @@ header {
     width: 100%;
 }
 
+.greyout-cell {
+    background: rgba(39,62,84,0.82);
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
+}
+
 
 /* Tic tac Tiger King */
 /* Joe Exotic vs Carole Baskin */
 /* CB win state - Great job, you cool cats and kittens. JE - I'm never going to financially recover from this */
 /* JE win state -  */
 /* Instead of noughts & crosses - joe and carole's heads. Or 2 types of tigers?  */
-/* Ugly animal print background */
 /* slashy font */
 /* sound effects?  */
 
