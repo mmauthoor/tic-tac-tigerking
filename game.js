@@ -1,6 +1,5 @@
 // Need ability to distinguish between 2 players on same computer - needs automatically place the correct image 
 
-// Need ability for users to specify where they want to place their move - i.e. through click or other input - and add image/change state - so will need to store the clicked area through data set. 
 // Questions: 
 // How will computer recognise when a win state has been achieved - i.e. that all noughts are in correct formation, or all crosses? 
 // What is best way to store data (i.e. player turns)?
@@ -10,6 +9,8 @@
 // Need ability for computer to tell when a win state has been reached, i.e. all of one type (image, etc.) in a row/column/diagonal, OR the grid is full. 
 // Need win state and lose state
 // Need restart ability
+
+// Important for variables to have semantic names, code to be clear etc
 
 
 // Nice to haves: 
@@ -29,7 +30,7 @@ let gridCells = document.querySelectorAll(".grid-cell");
 // Check if token already present in cell - DONE
 // Check if there are 3 or more of a player's tokens on the board - DONE
 // if so, are they in a single row/column/diagonal? 
-// Check if all the cells on the board are filled
+// Check if all the cells on the board are filled - DONE
 
 
 
@@ -43,14 +44,18 @@ let currentPlayer = "Player 1";
 
 function handlePlayerChoice(event) {
     let playerCellChoice = event.target;
+    let playerCells = "";
     if (isCellVacant(playerCellChoice)) {
         if (currentPlayer === "Player 1") {
-            playerCellChoice.classList.add("joe-token", "occupied");
+            playerCellChoice.classList.add("joe-cell", "occupied");
+            playerCells = ".joe-cell";
         } else if (currentPlayer === "Player 2") {
-            playerCellChoice.classList.add("carole-token", "occupied");
+            playerCellChoice.classList.add("carole-cell", "occupied");
+            playerCells = ".carole-cell";
         }
-        if (checkPlayerTokenNumber()) {
-            // pass playercellchoice into next function
+        if (checkPlayerCellNumber(playerCells)) {
+            isPlayerComboWinning(playerCellChoice);
+            // want to check if the current cell shares the same row/column as others of its type
         }
 
         togglePlayers();
@@ -59,32 +64,6 @@ function handlePlayerChoice(event) {
     }
 }
 
-
-// function handlePlayerChoice(event) {
-//     let playerChoice = event.target;
-//     if (checkIfCellVacant(playerChoice)) {
-//         if (player1) {
-//             playerChoice.classList.add("joe-token");
-//         } else if (player2) {
-//             playerChoice.classList.add("carole-token");
-//         }
-//         togglePlayers();
-//     } else {
-//         console.log("There's a tiger in this cage already! Choose a different one!");
-//     }
-// }
-
-// function togglePlayers() {
-//     if (player1) {
-//         player1 = false;
-//         player2 = true;
-//         console.log("Player 2, it's your turn!");
-//     } else if (player2) {
-//         player2 = false;
-//         player1 = true;
-//         console.log("Player 1, it's your turn!");
-//     }
-// }
 
 function togglePlayers() {
     if (currentPlayer === "Player 1") {
@@ -97,42 +76,89 @@ function togglePlayers() {
 }
 
 function isCellVacant(cell) {
-    if (cell.classList.contains("joe-token") || cell.classList.contains("carole-token")) {
+    if (cell.classList.contains("occupied")) {
         return false;
     } else {
         return true;
     }
 }
 
-function checkPlayerTokenNumber() {
-    if (currentPlayer === "Player 1") {
-        let joeTokens = document.querySelectorAll(".joe-token");
-        if (joeTokens.length >= 3) {
-            return true;
-        } else {
-            return false;
-        }
+function checkPlayerCellNumber(playerCells) {
+    let playerTotalCells = document.querySelectorAll(playerCells);
+    if (playerTotalCells.length >= 3) {
+        return true;
     } else {
-        let caroleTokens = document.querySelectorAll(".carole-token");
-        if (caroleTokens.length >= 3) {
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 }
 
-function isPlayerComboWinning() {
+function isPlayerComboWinning(playerCellChoice) {
+    let playerCellRow = playerCellChoice.dataset.row;
+    let playerCellCol = playerCellChoice.dataset.col;
 
+    if (playerCellChoice.classList.contains("joe-cell")) {
+        let joeCells = document.querySelectorAll(".joe-cell");
+        let joeRowCounter = 0;
+        let joeColCounter = 0;
+        
+        for (let i = 0; i < joeCells.length; i++) {
+            if (joeCells[i].dataset.row === playerCellRow) {
+                joeRowCounter++;
+                console.log(joeRowCounter)
+            } else if (joeCells[i].dataset.col === playerCellCol) {
+                joeColCounter++;
+                console.log(joeColCounter)
+            }
+        }
+        if (joeRowCounter === 3 || joeColCounter === 3) {
+            joeWinState();
+        } else {
+            for (let i = 0; i < joeCells.length; i++) {
+                let cellCoordinates = joeCells[i].dataset.row + joeCells[i].dataset.col; 
+                console.log(cellCoordinates);
+            }
+            // hard code if  cells are all in diagonal position. i.e. if in 11, 22, 33 OR 13, 22, 31
+
+        }
+    } else {
+        let caroleCells = document.querySelectorAll(".carole-cell");
+        let caroleCellCounter = 0;
+        // need to update with row and col counters
+
+        for (let i = 0; i < caroleCells.length; i++) {
+            if (caroleCells[i].dataset.row === playerCellRow || caroleCells[i].dataset.col === playerCellCol) {
+                caroleCellCounter++;
+                console.log(caroleCellCounter);
+            } 
+        }
+        if (caroleCellCounter === 3) {
+            caroleWinState();
+        } 
+    }
 }
+
+function joeWinState() {
+    console.log("joe wins!!");
+    // Special joe message here
+}
+
+function caroleWinState() {
+    console.log("carole wins!!");
+    // Great job, you cool cats and kittens! vs I'm never going to financially recover from this
+}
+
 
 
 function isBoardFull() {
     let occupiedCells = document.querySelectorAll(".occupied");
     console.log(occupiedCells);
     if (occupiedCells.length === gridCells.length) {
-        console.log("game over");
+        console.log("No winner");
     }
+}
+
+function handleRestart() {
+    gridCells.forEach(cell => cell.classList.remove("joe-cell", "carole-cell", "occupied"));
 }
 
 

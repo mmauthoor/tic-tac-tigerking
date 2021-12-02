@@ -50,12 +50,12 @@ header {
     padding: 20px;
     }
 
-.joe-token {
+.joe-cell {
     content: url(images/test-img.png);
     width: 100%;
 }
 
-.carole-token {
+.carole-cell {
     content: url(images/carole-test-img.jpeg);
     width: 100%;
 }
