@@ -33,6 +33,12 @@ header {
     text-align: right;
 }
 
+.game-status-div {
+    background-color: linen;
+    font-size: 14pt;
+    text-align: center;
+}
+
 .game-grid {
     margin: 30px auto;
     max-width: 550px;

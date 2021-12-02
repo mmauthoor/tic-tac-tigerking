@@ -1,10 +1,5 @@
-// Need ability to distinguish between 2 players on same computer - needs automatically place the correct image 
-
 // Questions: 
 // How will computer recognise when a win state has been achieved - i.e. that all noughts are in correct formation, or all crosses? 
-// What is best way to store data (i.e. player turns)?
-// Two nested arrays = one for column, one for rows. 
-
 
 // Need ability for computer to tell when a win state has been reached, i.e. all of one type (image, etc.) in a row/column/diagonal, OR the grid is full. 
 // Need win state and lose state
@@ -20,10 +15,9 @@
 // sound effects
 // 
 
-
 // DOM objects
 let gridCells = document.querySelectorAll(".grid-cell");
-
+let gameStatusDiv = document.querySelector(".game-status-div");
 
 // Functions that I'll need
 // toggle between players - DONE
@@ -33,45 +27,39 @@ let gridCells = document.querySelectorAll(".grid-cell");
 // Check if all the cells on the board are filled - DONE
 
 
-
-
 // Start game player status
-console.log("Player 1, it's your turn!");
 let currentPlayer = "Player 1";
-// let player1 = true;
-// let player2 = false;
-
 
 function handlePlayerChoice(event) {
     let playerCellChoice = event.target;
-    let playerCells = "";
+    let playerCellClass = "";
     if (isCellVacant(playerCellChoice)) {
         if (currentPlayer === "Player 1") {
             playerCellChoice.classList.add("joe-cell", "occupied");
-            playerCells = ".joe-cell";
+            playerCellClass = ".joe-cell";
         } else if (currentPlayer === "Player 2") {
             playerCellChoice.classList.add("carole-cell", "occupied");
-            playerCells = ".carole-cell";
+            playerCellClass = ".carole-cell";
         }
-        if (checkPlayerCellNumber(playerCells)) {
-            isPlayerComboWinning(playerCellChoice);
+        if (checkPlayerCellNumber(playerCellClass)) {
+            hasPlayerWon(playerCellClass, playerCellChoice);
             // want to check if the current cell shares the same row/column as others of its type
         }
 
+
         togglePlayers();
     } else {
-        console.log("There's a tiger in this cage already! Choose a different one!");
+        gameStatusDiv.textContent = `There's a tiger in this cage already! Choose a different one, ${currentPlayer}!`;
     }
 }
-
 
 function togglePlayers() {
     if (currentPlayer === "Player 1") {
         currentPlayer = "Player 2";
-        console.log("Player 2, it's your turn!");
+        gameStatusDiv.textContent = "Player 2, it's your turn!";
     } else if (currentPlayer === "Player 2") {
         currentPlayer = "Player 1";
-        console.log("Player 1, it's your turn!");
+        gameStatusDiv.textContent = "Player 1, it's your turn!";
     }
 }
 
@@ -92,62 +80,62 @@ function checkPlayerCellNumber(playerCells) {
     }
 }
 
-function isPlayerComboWinning(playerCellChoice) {
-    let playerCellRow = playerCellChoice.dataset.row;
-    let playerCellCol = playerCellChoice.dataset.col;
+function hasPlayerWon(playerCellClass, playerCellChoice) {
+    let playerCellChoiceRow = playerCellChoice.dataset.row;
+    let playerCellChoiceCol = playerCellChoice.dataset.col;
+    // console.log("The most recent cell placed was " + playerCellChoiceRow + playerCellChoiceCol );
 
-    if (playerCellChoice.classList.contains("joe-cell")) {
-        let joeCells = document.querySelectorAll(".joe-cell");
-        let joeRowCounter = 0;
-        let joeColCounter = 0;
-        
-        for (let i = 0; i < joeCells.length; i++) {
-            if (joeCells[i].dataset.row === playerCellRow) {
-                joeRowCounter++;
-                console.log(joeRowCounter)
-            } else if (joeCells[i].dataset.col === playerCellCol) {
-                joeColCounter++;
-                console.log(joeColCounter)
-            }
+    let playerTotalCells = document.querySelectorAll(playerCellClass);
+    let playerRowCounter = 0;
+    let playerColCounter = 0;
+    
+    // Could maybe swap out for a for each function??
+    for (let i = 0; i < playerTotalCells.length; i++) {
+        let currentCell = playerTotalCells[i];
+        // console.log(currentCell);
+        if (currentCell.dataset.row === playerCellChoiceRow) {
+            playerRowCounter++;
+            // console.log("The current row Counter is " + playerRowCounter)
         }
-        if (joeRowCounter === 3 || joeColCounter === 3) {
-            joeWinState();
-        } else {
-            for (let i = 0; i < joeCells.length; i++) {
-                let cellCoordinates = joeCells[i].dataset.row + joeCells[i].dataset.col; 
-                console.log(cellCoordinates);
-            }
-            // hard code if  cells are all in diagonal position. i.e. if in 11, 22, 33 OR 13, 22, 31
-
+        if (currentCell.dataset.col === playerCellChoiceCol) {
+            playerColCounter++;
+            // console.log("The current col counter is " + playerColCounter);
+            // console.log(playerTotalCells);
         }
+    }
+    if (playerRowCounter === 3 || playerColCounter === 3) {
+        declareWinner(playerCellClass);
     } else {
-        let caroleCells = document.querySelectorAll(".carole-cell");
-        let caroleCellCounter = 0;
-        // need to update with row and col counters
+        // maybe could change to a forEach? 
+        for (let i = 0; i < playerTotalCells.length; i++) {
+            let currentCell = playerTotalCells[i];
+            let cellCoordinates = currentCell.dataset.row + currentCell.dataset.col; 
+            let middleCellCoordinates = "22";
 
-        for (let i = 0; i < caroleCells.length; i++) {
-            if (caroleCells[i].dataset.row === playerCellRow || caroleCells[i].dataset.col === playerCellCol) {
-                caroleCellCounter++;
-                console.log(caroleCellCounter);
-            } 
+            if (cellCoordinates === middleCellCoordinates) {
+                let firstDiagonalCounter = 0;
+                let secondDiagonalCounter = 0;
+                for (i = 0; i < playerTotalCells.length; i++) {
+
+                }
+                console.log("we have a middle square");
+            }
         }
-        if (caroleCellCounter === 3) {
-            caroleWinState();
-        } 
+        // hard code if  cells are all in diagonal position. i.e. if in 11, 22, 33 OR 13, 22, 31
     }
 }
 
-function joeWinState() {
-    console.log("joe wins!!");
-    // Special joe message here
-}
 
-function caroleWinState() {
+function declareWinner(winner) {
+    if (winner === ".joe-cell") {
+        console.log("joe wins!!");
+    // Special joe message here
+    } else if (winner === ".carole-cell") {
+        // if carole wins
     console.log("carole wins!!");
     // Great job, you cool cats and kittens! vs I'm never going to financially recover from this
+    }   
 }
-
-
 
 function isBoardFull() {
     let occupiedCells = document.querySelectorAll(".occupied");
