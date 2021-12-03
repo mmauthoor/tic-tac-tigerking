@@ -1,14 +1,19 @@
 // Important for variables to have semantic names, code to be clear etc
 
+// readme info - highly recommend using chrome/safari to view for animations. IE not recommended. 
+// Approach - in the wake of TK season 2, thought it would be fun to make a game encapsulating the chaotic energy and colourful characters. 
+// acknowledge where animations and pics came from 
+
 // Need to:
 // refactor to clean up code
 // choose better variable names
+// do JE win state text
 // add images to sides and popups
 // choose fonts
 // style popups
 // work out how to stop images being clickable when game over
-// slow down transition between states
 // add animated border to game status
+// favicon?
 
 
 // Nice to haves: 
@@ -18,8 +23,8 @@
 
 // DOM objects
 let popupDiv = document.querySelector(".popup-div");
-let joeWinPopup = document.querySelector(".joe-win-popup");
-let caroleWinPopup = document.querySelector(".carole-win-popup");
+let player1WinPopup = document.querySelector(".player1-win-popup");
+let player2WinPopup = document.querySelector(".player2-win-popup");
 let tiePopup = document.querySelector(".tie-popup");
 
 let containerDiv = document.querySelector(".container-div");
@@ -32,20 +37,20 @@ let restartBtns = document.querySelectorAll(".restart-btn");
 // Start game player status
 let currentPlayer = "Player 1";
 
-function handlePlayerChoice(event) {
-    let playerCellChoice = event.target;
+function handlePlayerMove(event) {
+    let chosenCell = event.target;
     let playerCellClass = "";
-    if (isCellVacant(playerCellChoice)) {
-        
+    if (isCellVacant(chosenCell)) {
+        // could put if statements here re: tk2
         if (currentPlayer === "Player 1") {
-            playerCellChoice.classList.add("joe-cell", "occupied");
-            playerCellClass = ".joe-cell";
+            chosenCell.classList.add("player1-cell", "occupied");
+            playerCellClass = ".player1-cell";
         } else if (currentPlayer === "Player 2") {
-            playerCellChoice.classList.add("carole-cell", "occupied");
-            playerCellClass = ".carole-cell";
+            chosenCell.classList.add("player2-cell", "occupied");
+            playerCellClass = ".player2-cell";
         }
-        if (checkPlayerCellNumber(playerCellClass)) {
-            if (hasPlayerWon(playerCellClass, playerCellChoice)) {
+        if (hasPlayerMade3Moves(playerCellClass)) {
+            if (isWin(playerCellClass, chosenCell)) {
                 declareWinner(playerCellClass);
             } else if (isBoardFull()) {
                 isTie();
@@ -70,69 +75,71 @@ function togglePlayers() {
     }
 }
 
-// function isCellVacant(cell) {
-//     if (cell.classList.contains("occupied")) {
-//         return false;
-//     } else {
-//         return true;
-//     }
-// }
-
 function isCellVacant(cell) {
     return !cell.classList.contains("occupied");
 }
 
-function checkPlayerCellNumber(playerCells) {
-    let playerTotalCells = document.querySelectorAll(playerCells);
+function hasPlayerMade3Moves(playerCellClass) {
+    let playerTotalCells = document.querySelectorAll(playerCellClass);
     return playerTotalCells.length >= 3;
 }
 
-function checkRowColWins(playerCellChoice, playerTotalCells) {
-    let playerCellChoiceRow = playerCellChoice.dataset.row;
-    let playerCellChoiceCol = playerCellChoice.dataset.col;
+function isRowOrColumnFull(chosenCell, playerTotalCells) {
+    let chosenCellRow = chosenCell.dataset.row;
+    let chosenCellCol = chosenCell.dataset.col;
 
     let playerRowCounter = 0;
     let playerColCounter = 0;
 
     playerTotalCells.forEach(function(cell) {
-        if (cell.dataset.row === playerCellChoiceRow) {
+        if (cell.dataset.row === chosenCellRow) {
             playerRowCounter++;
         }
-        if (cell.dataset.col === playerCellChoiceCol) {
+        if (cell.dataset.col === chosenCellCol) {
             playerColCounter++;
         }
     });
-    if (playerRowCounter === 3 || playerColCounter === 3) {
+    if (playerRowCounter === 3) {
+        playerTotalCells.forEach(function(cell) {
+            if (cell.dataset.row === chosenCellRow) {
+                cell.classList.add("winning-combo");
+            }
+        });
+        return true;
+    } else if (playerColCounter === 3) {
+        playerTotalCells.forEach(function(cell) {
+            if (cell.dataset.col === chosenCellCol) {
+                cell.classList.add("winning-combo");
+            }
+        });
         return true;
     }
 }
 
-function checkDiagonalWins(playerTotalCells) {
+function isDiagonalFull(playerTotalCells) {
     let cellCoordinateArray = [];
-    for (let i = 0; i < playerTotalCells.length; i++) {
-        let currentCell = playerTotalCells[i];
-        let cellCoordinates = currentCell.dataset.row + currentCell.dataset.col;
+    playerTotalCells.forEach(function(cell) {
+        let cellCoordinates = cell.dataset.row + cell.dataset.col;
         cellCoordinateArray.push(cellCoordinates); 
-        }
-        if (cellCoordinateArray.includes("11") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("33") || cellCoordinateArray.includes("13") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("31")) {
-            return true;
-        }
+        });
+        // Ideally identifying the diagonal win state would be based on the maths patterns in the grid rather than hard-coded like this, to allow the grid to be enlarged beyond 3x3. Might refactor at a later date. 
+    return cellCoordinateArray.includes("11") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("33") || cellCoordinateArray.includes("13") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("31");
 }
 
-function hasPlayerWon(playerCellClass, playerCellChoice) {
+function isWin(playerCellClass, chosenCell) {
     let playerTotalCells = document.querySelectorAll(playerCellClass); 
-    if (checkRowColWins(playerCellChoice, playerTotalCells)) {
+    if (isRowOrColumnFull(chosenCell, playerTotalCells)) {
         return true;
-    } else if (checkDiagonalWins(playerTotalCells)) {
+    } else if (isDiagonalFull(playerTotalCells)) {
         return true;
     } 
 }
 
 function declareWinner(winner) {
-    if (winner === ".joe-cell") {
-        joeWinPopup.classList.remove("hide");
-    } else if (winner === ".carole-cell") {
-        caroleWinPopup.classList.remove("hide");
+    if (winner === ".player1-cell") {
+        player1WinPopup.classList.remove("hide");
+    } else if (winner === ".player2-cell") {
+        player2WinPopup.classList.remove("hide");
     }   
 }
 
@@ -151,18 +158,16 @@ function handleStart() {
 }
 
 function handleRestart() {
-    gridCells.forEach(cell => cell.classList.remove("joe-cell", "carole-cell", "occupied"));
-    joeWinPopup.classList.add("hide");
-    caroleWinPopup.classList.add("hide");
+    gridCells.forEach(cell => cell.classList.remove("player1-cell", "player2-cell", "occupied", "winning-combo"));
+    player1WinPopup.classList.add("hide");
+    player2WinPopup.classList.add("hide");
     tiePopup.classList.add("hide");
     currentPlayer = "Player 1";
-    gameStatusDiv.textContent = "Player 1, it's your turn!";
-
-    // also add clickability back
+    gameStatusDiv.textContent = "Player 1, you go first!";
 }
 
 // Event handlers
-gridCells.forEach(cell => cell.addEventListener("click", handlePlayerChoice));
+gridCells.forEach(cell => cell.addEventListener("click", handlePlayerMove));
 startBtn.addEventListener("click", handleStart);
 restartBtns.forEach(button => button.addEventListener("click", handleRestart));
 
