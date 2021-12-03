@@ -11,16 +11,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="popup-div">
+    <div class="popup-div start-game-popup">
         <h1>Tic Tac Tiger King</h1>
         <h2>Welcome to the jungle!</h2>
         <h3>Start playing?</h3>
         <button class="start-btn">Start the game</button>
     </div>
+    <!-- Might be better to edit text content itself rather than add hidden divs like this -->
+    <div class="popup-div joe-win-popup hide">
+        <h2>Player 1 wins!</h2>
+        <p>Joe: quote text to come</p>
+        <p>Carole: quote text to come</p>
+        <button class="restart-btn">Play again?</button>
+    </div>
+    <div class="popup-div carole-win-popup hide">
+        <h2>Player 2 wins!</h2>
+        <p>Carole: Great job, you cool cats and kittens!</p>
+        <p>Joe: I'm never gonna financially recover from this.</p>
+        <button class="restart-btn">Play again?</button>
+    </div>
+    <div class="popup-div tie-popup hide">
+        <h2>It's a tie!</h2>
+        <button class="restart-btn">Play again?</button>
+    </div>
     <div class="container-div hide">
         <header>Tic Tac <span class="tiger-king-span">Tiger King</span></header>
         <div class="game-status-div">Player 1 begins!</div>
-        <button class="restart-btn">Restart?</button>
+        
         <main>
             <aside class="player1">image here</aside>
             <div class="gameboard-div">
@@ -35,12 +52,13 @@
                     <div class="grid-cell" data-row="3" data-col="2"></div>
                     <div class="grid-cell" data-row="3" data-col="3"></div>
                 </div>
+                <button class="restart-btn">Restart?</button>
             </div>
             <aside class="player2">image here</aside>
         </main>
-        <!-- Need area/pop-up to announce player turns and win/lose state-->
+        
         <footer>
-            <!-- <a href="https://www.freepik.com/vectors/fashion">Fashion vector created by Vectorium - www.freepik.com</a> -->
+            <a href="https://www.freepik.com/vectors/fashion">Fabulous animal print background artwork created by Vectorium - www.freepik.com</a>
         </footer>
     </div>
     <script src="game.js"></script>

@@ -1,11 +1,7 @@
-
-
-
 // Need win state and lose state
 // Need restart ability
 
 // Important for variables to have semantic names, code to be clear etc
-
 
 // Nice to haves: 
 // after 1 game, would go on to TK2 - Jeff Lowe v Tim Stark
@@ -16,12 +12,16 @@
 
 // DOM objects
 let popupDiv = document.querySelector(".popup-div");
+let joeWinPopup = document.querySelector(".joe-win-popup");
+let caroleWinPopup = document.querySelector(".carole-win-popup");
+let tiePopup = document.querySelector(".tie-popup");
+
 let containerDiv = document.querySelector(".container-div");
 let gridCells = document.querySelectorAll(".grid-cell");
 let gameStatusDiv = document.querySelector(".game-status-div");
 
 let startBtn = document.querySelector(".start-btn");
-let restartBtn = document.querySelector(".restart-btn");
+let restartBtns = document.querySelectorAll(".restart-btn");
 
 // Functions that I'll need
 // toggle between players - DONE
@@ -50,10 +50,8 @@ function handlePlayerChoice(event) {
         if (checkPlayerCellNumber(playerCellClass)) {
             if (hasPlayerWon(playerCellClass, playerCellChoice)) {
                 declareWinner(playerCellClass);
-                gameOver();
             } else if (isBoardFull()) {
-                console.log("board is full - it's a tie");
-                gameOver();
+                isTie();
             } else {
                 togglePlayers();
             }
@@ -101,15 +99,11 @@ function checkRowColWins(playerCellChoice, playerTotalCells) {
     // Could maybe swap out for a for each function??
     for (let i = 0; i < playerTotalCells.length; i++) {
         let currentCell = playerTotalCells[i];
-        // console.log(currentCell);
         if (currentCell.dataset.row === playerCellChoiceRow) {
             playerRowCounter++;
-            // console.log("The current row Counter is " + playerRowCounter)
         }
         if (currentCell.dataset.col === playerCellChoiceCol) {
             playerColCounter++;
-            // console.log("The current col counter is " + playerColCounter);
-            // console.log(playerTotalCells);
         }
     }
     if (playerRowCounter === 3 || playerColCounter === 3) {
@@ -123,7 +117,6 @@ function checkDiagonalWins(playerTotalCells) {
         let currentCell = playerTotalCells[i];
         let cellCoordinates = currentCell.dataset.row + currentCell.dataset.col;
         cellCoordinateArray.push(cellCoordinates); 
-        // console.log(cellCoordinateArray);
         }
         if (cellCoordinateArray.includes("11") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("33") || cellCoordinateArray.includes("13") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("31")) {
             return true;
@@ -141,12 +134,9 @@ function hasPlayerWon(playerCellClass, playerCellChoice) {
 
 function declareWinner(winner) {
     if (winner === ".joe-cell") {
-        gameStatusDiv.textContent = "joe wins!!";
-    // Special joe message here
+        joeWinPopup.classList.remove("hide");
     } else if (winner === ".carole-cell") {
-        // if carole wins
-    gameStatusDiv.textContent = "carole wins!!";
-    // Great job, you cool cats and kittens! vs I'm never going to financially recover from this
+        caroleWinPopup.classList.remove("hide");
     }   
 }
 
@@ -155,12 +145,8 @@ function isBoardFull() {
     return occupiedCells.length === gridCells.length;
 }
 
-function gameOver() {
-    gridCells.forEach(cell => cell.classList.add("greyout-cell"));
-    alert("game over!")
-
-    // add overlay to all grid cells
-    // remove cliability for all cells but reactivate 
+function isTie() {
+    tiePopup.classList.remove("hide");
 }
 
 function handleStart() {
@@ -170,15 +156,18 @@ function handleStart() {
 
 function handleRestart() {
     gridCells.forEach(cell => cell.classList.remove("joe-cell", "carole-cell", "occupied"));
+    joeWinPopup.classList.add("hide");
+    caroleWinPopup.classList.add("hide");
+    tiePopup.classList.add("hide");
     // also remove greyed out sheet over them
     currentPlayer = "Player 1";
+    gameStatusDiv.textContent = "Player 1, it's your turn!";
+
     // also add clickability back
 }
-
 
 // Event handlers
 gridCells.forEach(cell => cell.addEventListener("click", handlePlayerChoice));
 startBtn.addEventListener("click", handleStart);
-restartBtn.addEventListener("click", handleRestart);
-// Need a handler to click on restart button, start button
+restartBtns.forEach(button => button.addEventListener("click", handleRestart));
 

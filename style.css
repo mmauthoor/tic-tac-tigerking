@@ -18,7 +18,7 @@ body {
 }
 
 header {
-    min-height: 100px;
+    min-height: 70px;
     max-width: 800px;
     margin: 40px auto;
     padding: 30px 60px;
@@ -46,7 +46,14 @@ header {
     background-color: linen;
     font-size: 14pt;
     text-align: center;
-    width: 85%;
+    width: 40%;
+    padding: 15px;
+    /* box-shadow: 5px 5px 5px #C19A6B; */
+    /* ideally contents would flash?  */
+}
+
+button {
+    cursor: pointer;
 }
 
 .restart-btn {
@@ -76,10 +83,23 @@ header {
     display: none;
 }
 
+.hide {
+    display: none;
+}
+
+.joe-win-popup, .carole-win-popup {
+    height: 40%;
+}
+
+.joe-win-popup.show, .carole-win-popup.show {
+    /* need a slower transition to the popup */
+}
+
 
 main {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
+    margin: 15px;
 }
 
 .gameboard-div {
@@ -119,13 +139,27 @@ main {
     width: 100%;
 }
 
-.greyout-cell {
+/* .greyout-cell {
     background: rgba(39,62,84,0.82);
     overflow: hidden;
     height: 100%;
     z-index: 2;
+} */
+
+footer {
+    min-height: 100px;
+    background-color: #C04000;
+    padding: 30px 10px 10px;
 }
 
+a {
+    text-decoration: none;
+    color: linen;
+}
+
+a:hover {
+    color: white;
+}
 
 /* Tic tac Tiger King */
 /* Joe Exotic vs Carole Baskin */
