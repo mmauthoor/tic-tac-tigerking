@@ -7,39 +7,44 @@
     <title>TIC TAC TIGER KING</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Imbue:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Imbue:wght@900&family=Josefin+Sans:wght@300;400&family=Smooch&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="popup-div start-game-popup">
-        <h1>Tic Tac Tiger King</h1>
+    <div class="popup-div start-game-popup swirl-in-fwd">
+        <h1>Tic Tac <span>Tiger King</span></h1>
         <h2>Welcome to the jungle!</h2>
-        <h3>Start playing?</h3>
-        <button class="start-btn">Start the game</button>
+        <p>Your champions are: Player 1, the Tiger King. Player 2, the Cool Cat.</p>
+        <h3>Are you ready for this wild ride?</h3>
+        <button class="start-btn">Start</button>
     </div>
     <!-- Might be better to edit text content itself rather than add hidden divs like this -->
-    <div class="popup-div joe-win-popup hide">
+    <div class="popup-div joe-win-popup swirl-in-fwd hide">
         <h2>Player 1 wins!</h2>
         <p>Joe: quote text to come</p>
         <p>Carole: quote text to come</p>
         <button class="restart-btn">Play again?</button>
     </div>
-    <div class="popup-div carole-win-popup hide">
+    <div class="popup-div carole-win-popup swirl-in-fwd hide">
         <h2>Player 2 wins!</h2>
         <p>Carole: Great job, you cool cats and kittens!</p>
         <p>Joe: I'm never gonna financially recover from this.</p>
         <button class="restart-btn">Play again?</button>
     </div>
-    <div class="popup-div tie-popup hide">
+    <div class="popup-div tie-popup swirl-in-fwd hide">
         <h2>It's a tie!</h2>
         <button class="restart-btn">Play again?</button>
     </div>
     <div class="container-div hide">
-        <header>Tic Tac <span class="tiger-king-span">Tiger King</span></header>
+        <header><span class="tictac-span">Tic Tac</span> <span class="tiger-king-span">Tiger King</span></header>
         <div class="game-status-div">Player 1 begins!</div>
-        
         <main>
-            <aside class="player1">image here</aside>
+            <aside class="player1">
+                <img src="images/joe-exotic.png" alt="joe exotic floating head">
+                <div class="player-name">
+                    Player 1<span>The Tiger King</span>
+                </div>
+            </aside>
             <div class="gameboard-div">
                 <div class="game-grid">
                     <div class="grid-cell" data-row="1" data-col="1"></div>
@@ -52,13 +57,19 @@
                     <div class="grid-cell" data-row="3" data-col="2"></div>
                     <div class="grid-cell" data-row="3" data-col="3"></div>
                 </div>
-                <button class="restart-btn">Restart?</button>
+                <button class="restart-btn">Restart</button>
             </div>
-            <aside class="player2">image here</aside>
+            <aside class="player2">
+                <img src="images/carole-baskin-1586800057-removebg-preview.png" alt="carole baskin floating head">
+                <div class="player-name">
+                    Player 2<span>The Cool Cat</span>
+                </div>
+            </aside>
         </main>
-        
         <footer>
-            <a href="https://www.freepik.com/vectors/fashion">Fabulous animal print background artwork created by Vectorium - www.freepik.com</a>
+            <a href="https://www.freepik.com/vectors/fashion">Fabulous animal print background artwork created by Vectorium – www.freepik.com</a>
+            <a href='https://www.freepik.com/vectors/background'>Tiger icons created by freepik - www.freepik.com</a>
+            <!-- Images courtesy of https://imgur.com/user/halbleibkyle -->
         </footer>
     </div>
     <script src="game.js"></script>

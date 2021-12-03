@@ -1,14 +1,20 @@
-// Need win state and lose state
-// Need restart ability
-
 // Important for variables to have semantic names, code to be clear etc
+
+// Need to:
+// refactor to clean up code
+// choose better variable names
+// add images to sides and popups
+// choose fonts
+// style popups
+// work out how to stop images being clickable when game over
+// slow down transition between states
+// add animated border to game status
+
 
 // Nice to haves: 
 // after 1 game, would go on to TK2 - Jeff Lowe v Tim Stark
-// start-up screen: Welcome to the jungle: Tic Tac Tiger King. Click to start
-// Then show the grid and diff sides
 // sound effects
-// 
+// jiggly popup boxes
 
 // DOM objects
 let popupDiv = document.querySelector(".popup-div");
@@ -22,15 +28,6 @@ let gameStatusDiv = document.querySelector(".game-status-div");
 
 let startBtn = document.querySelector(".start-btn");
 let restartBtns = document.querySelectorAll(".restart-btn");
-
-// Functions that I'll need
-// toggle between players - DONE
-// Check if token already present in cell - DONE
-// Check if there are 3 or more of a player's tokens on the board - DONE
-// if so, are they in a single row/column/diagonal? - DONE
-// Check if all the cells on the board are filled - DONE
-
-
 
 // Start game player status
 let currentPlayer = "Player 1";
@@ -73,21 +70,21 @@ function togglePlayers() {
     }
 }
 
+// function isCellVacant(cell) {
+//     if (cell.classList.contains("occupied")) {
+//         return false;
+//     } else {
+//         return true;
+//     }
+// }
+
 function isCellVacant(cell) {
-    if (cell.classList.contains("occupied")) {
-        return false;
-    } else {
-        return true;
-    }
+    return !cell.classList.contains("occupied");
 }
 
 function checkPlayerCellNumber(playerCells) {
     let playerTotalCells = document.querySelectorAll(playerCells);
-    if (playerTotalCells.length >= 3) {
-        return true;
-    } else {
-        return false;
-    }
+    return playerTotalCells.length >= 3;
 }
 
 function checkRowColWins(playerCellChoice, playerTotalCells) {
@@ -96,16 +93,15 @@ function checkRowColWins(playerCellChoice, playerTotalCells) {
 
     let playerRowCounter = 0;
     let playerColCounter = 0;
-    // Could maybe swap out for a for each function??
-    for (let i = 0; i < playerTotalCells.length; i++) {
-        let currentCell = playerTotalCells[i];
-        if (currentCell.dataset.row === playerCellChoiceRow) {
+
+    playerTotalCells.forEach(function(cell) {
+        if (cell.dataset.row === playerCellChoiceRow) {
             playerRowCounter++;
         }
-        if (currentCell.dataset.col === playerCellChoiceCol) {
+        if (cell.dataset.col === playerCellChoiceCol) {
             playerColCounter++;
         }
-    }
+    });
     if (playerRowCounter === 3 || playerColCounter === 3) {
         return true;
     }
@@ -159,7 +155,6 @@ function handleRestart() {
     joeWinPopup.classList.add("hide");
     caroleWinPopup.classList.add("hide");
     tiePopup.classList.add("hide");
-    // also remove greyed out sheet over them
     currentPlayer = "Player 1";
     gameStatusDiv.textContent = "Player 1, it's your turn!";
 
