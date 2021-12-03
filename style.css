@@ -331,10 +331,10 @@ footer a {
     right: 0;
     opacity: 1;
     transition: .3s ease;
-    background-color: rgba(259, 67, 95, 0.7);
+    background-color: rgba(255, 164, 0, 0.7);
     overflow: hidden;
 }
 
 .grid-cell.occupied.winning-combo:hover {
-    background-color: rgba(259, 67, 95, 0.7);
+    background-color: rgba(255, 164, 0, 0.7);
 }

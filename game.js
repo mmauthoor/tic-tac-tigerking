@@ -123,7 +123,21 @@ function isDiagonalFull(playerTotalCells) {
         cellCoordinateArray.push(cellCoordinates); 
         });
         // Ideally identifying the diagonal win state would be based on the maths patterns in the grid rather than hard-coded like this, to allow the grid to be enlarged beyond 3x3. Might refactor at a later date. 
-    return cellCoordinateArray.includes("11") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("33") || cellCoordinateArray.includes("13") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("31");
+    if (cellCoordinateArray.includes("11") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("33")) {
+        playerTotalCells.forEach(function(cell) {
+            if (cell.dataset.row + cell.dataset.col === "11" || cell.dataset.row + cell.dataset.col === "22" || cell.dataset.row + cell.dataset.col === "33") {
+                cell.classList.add("winning-combo");
+            }
+        });
+        return true;
+    } else if (cellCoordinateArray.includes("13") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("31")) {
+        playerTotalCells.forEach(function(cell) {
+            if (cell.dataset.row + cell.dataset.col === "13" || cell.dataset.row + cell.dataset.col === "22" || cell.dataset.row + cell.dataset.col === "31") {
+                cell.classList.add("winning-combo");
+            }
+        });
+        return true;
+    }
 }
 
 function isWin(playerCellClass, chosenCell) {
