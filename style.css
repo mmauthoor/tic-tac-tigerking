@@ -9,6 +9,14 @@ body {
     margin: 0;
 }
 
+.container-div {
+    text-align: center;
+}
+
+.container-div.hide {
+    display: none;
+}
+
 header {
     min-height: 100px;
     max-width: 800px;
@@ -34,13 +42,48 @@ header {
 }
 
 .game-status-div {
+    margin: 0 auto;
     background-color: linen;
     font-size: 14pt;
     text-align: center;
+    width: 85%;
 }
 
 .restart-btn {
 
+}
+
+.popup-div {
+    z-index: 2;
+    background-color: mistyrose;
+    padding: 40px;
+    margin: 200px auto;
+    position: fixed;
+    display: box;
+    width: 70%;
+    height: 60%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.popup-div.hide {
+    display: none;
+}
+
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.gameboard-div {
+    text-align: center;
 }
 
 .game-grid {
@@ -58,7 +101,13 @@ header {
     aspect-ratio: 1;
     background-color: linen;
     padding: 20px;
+    cursor: pointer;
     }
+
+.grid-cell:hover {
+    background-color: #89CFF0;
+    transition-duration: 5ms;
+}
 
 .joe-cell {
     content: url(images/test-img.png);

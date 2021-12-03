@@ -15,8 +15,12 @@
 // 
 
 // DOM objects
+let popupDiv = document.querySelector(".popup-div");
+let containerDiv = document.querySelector(".container-div");
 let gridCells = document.querySelectorAll(".grid-cell");
 let gameStatusDiv = document.querySelector(".game-status-div");
+
+let startBtn = document.querySelector(".start-btn");
 let restartBtn = document.querySelector(".restart-btn");
 
 // Functions that I'll need
@@ -159,6 +163,11 @@ function gameOver() {
     // remove cliability for all cells but reactivate 
 }
 
+function handleStart() {
+    containerDiv.classList.toggle("hide");
+    popupDiv.classList.toggle("hide");
+}
+
 function handleRestart() {
     gridCells.forEach(cell => cell.classList.remove("joe-cell", "carole-cell", "occupied"));
     // also remove greyed out sheet over them
@@ -169,6 +178,7 @@ function handleRestart() {
 
 // Event handlers
 gridCells.forEach(cell => cell.addEventListener("click", handlePlayerChoice));
+startBtn.addEventListener("click", handleStart);
 restartBtn.addEventListener("click", handleRestart);
 // Need a handler to click on restart button, start button
 
