@@ -1,12 +1,3 @@
-// Important for variables to have semantic names, code to be clear etc
-
-// readme info - highly recommend using chrome/safari to view for animations. IE not recommended. 
-// Approach - in the wake of TK season 2, thought it would be fun to make a game encapsulating the chaotic energy and colourful characters. 
-// acknowledge where animations and pics came from - Animista, Netflix
-
-// Need to:
-// add images to sides
-
 // DOM objects
 let popupDiv = document.querySelector(".popup-div");
 let player1WinPopup = document.querySelector(".player1-win-popup");
@@ -141,6 +132,7 @@ function isWin(playerCellClass, chosenCell) {
 }
 
 function declareWinner(winner) {
+    gameStatusDiv.textContent = "We have a winner!";
     if (winner === ".player1-cell") {
         player1WinPopup.classList.remove("hide");
         player1WinCounter++;

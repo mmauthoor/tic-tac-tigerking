@@ -16,7 +16,7 @@ body {
     background-color: #1B1212;
     color: linen;
     padding: 40px;
-    margin: 200px auto;
+    margin: 100px auto;
     position: fixed;
     display: box;
     border: solid 3px linen;
@@ -45,7 +45,7 @@ body {
     font-family: 'Smooch', cursive;
     font-size: 60pt;
     text-align: left;
-    margin: 1% 10% 1% ;
+    margin: 0 auto 1% ;
     line-height: 1;
 }
 
@@ -293,6 +293,7 @@ main {
 }
 
 .player1-win-popup, .player2-win-popup, .tie-popup {
+    margin-top: 20%;
     font-size: 18pt;
     min-height: 50%;
     width: 50%;
@@ -503,6 +504,13 @@ footer a {
 }
 
 /* Media queries - more to come to make it fully responsive  */
+@media only screen and (max-width: 1200px) {
+    .start-game-popup-title h1 {
+        margin: 0 1% 1%;
+        font-size: 45pt;
+    }
+}
+
 @media only screen and (max-width: 1000px) {
     .player1 div img, .player2 div img {
         float: none;
@@ -510,7 +518,6 @@ footer a {
         width: 30%;
         display: block;
     }
-
 }
 
 @media only screen and (max-width: 600px) {
