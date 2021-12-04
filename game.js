@@ -40,7 +40,6 @@ function handlePlayerMove(event) {
     let chosenCell = event.target;
     let playerCellClass = "";
     if (isCellVacant(chosenCell)) {
-        // could put if statements here re: tk2
         if (currentPlayer === "Player 1") {
             chosenCell.classList.add("player1-cell", "occupied");
             playerCellClass = ".player1-cell";

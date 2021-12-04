@@ -16,7 +16,7 @@ body {
     background-color: #1B1212;
     color: linen;
     padding: 40px;
-    margin: 150px auto;
+    margin: 200px auto;
     position: fixed;
     display: box;
     border: solid 3px linen;
@@ -176,55 +176,48 @@ main {
     margin: 40px 10px;
 }
 
-aside {
-    font-size: 40pt;
-    overflow: hidden;
-}
-
-/* aside.player1 {
-    background-image: url(images/test-img.jpeg);
-    background-position: 30% 40%;
-} */
-
 aside img {
     width: 100%;
 }
 
 .player-info-div {
+    width: 80%;
+    margin: 0 auto;
     background-color: linen;
-    /* background-image: url(images/brush-stroke-banner-6.png);  */
-    /* background-size: contain; */
-    /* background-repeat:repeat-y; */
-    /* background-size: cover; */
-    /* color: #362419; */
-    color: black;
+    color: #362419;
     font-family: 'Imbue', serif;
     font-size: 25pt;
     padding: 5px;
     position: relative;
+    padding: 10px;
 }
 
 .player-info-span {
     display: block;
     font-family: 'Smooch', cursive;
     font-size: 45pt;
+    color: #C04000;
 }
 
 .player1 div {
     transform: rotate(-2deg);
+    box-shadow: -8px 8px 10px #362419;
 }
 
 .player1 div img {
     float: left;
-    margin-left: 20px;
+    margin-left: 10px;
+    margin-bottom: 2px;
 }
 
 .player2 div {
     transform: rotate(2deg);
+    box-shadow: 8px 8px 10px #362419;
 }
 
 .player2 div img {
     float: right;
+    margin-right: 10px;
 }
 
 .player-info-div img {
@@ -233,12 +226,8 @@ aside img {
 }
 
 .player-info-div p {
-    /* font-family: 'Josefin Sans', sans-serif; */
     font-size: 20pt;
-}
-
-.gameboard-div {
-    text-align: center;
+    margin: 2px;
 }
 
 .game-grid {
@@ -298,7 +287,8 @@ aside img {
 
 .player1-win-popup, .player2-win-popup, .tie-popup {
     font-size: 18pt;
-    min-height: 20%;
+    min-height: 50%;
+    width: 50%;
 }
 
 .player1-win-popup img, .player2-win-popup img, .tie-popup img {
@@ -317,7 +307,7 @@ aside img {
 footer {
     min-height: 100px;
     background-color: #C04000;
-    padding: 40px 10px 10px;
+    padding: 30px 10px 10px;
     font-size: 10pt;
     font-weight: 300;
     line-height: 2;
@@ -342,8 +332,8 @@ footer a {
 }
 
 .swirl-in-fwd {
-	-webkit-animation: swirl-in-fwd 0.6s ease-out 1s both;
-	animation: swirl-in-fwd 0.6s ease-out 1s both;
+	-webkit-animation: swirl-in-fwd 0.6s ease-out 0.8s both;
+	animation: swirl-in-fwd 0.6s ease-out 0.8s both;
 }
 
 .swing-in-top-fwd {
@@ -363,7 +353,7 @@ footer a {
  * animation shake-horizontal
  * ----------------------------------------
  */
- @-webkit-keyframes shake-horizontal {
+@-webkit-keyframes shake-horizontal {
     0%,
     100% {
         -webkit-transform: translateX(0);
@@ -390,7 +380,7 @@ footer a {
         -webkit-transform: translateX(-8px);
         transform: translateX(-8px);
     }
-  }
+}
 
 @keyframes shake-horizontal {
     0%,
@@ -445,7 +435,8 @@ footer a {
         transform: rotate(0) scale(1);
         opacity: 1;
     }
-  }
+}
+
 @keyframes swirl-in-fwd {
     0% {
         -webkit-transform: rotate(-540deg) scale(0);
@@ -486,8 +477,8 @@ footer a {
         transform-origin: top;
         opacity: 1;
     }
-  }
-  @keyframes swing-in-top-fwd {
+}
+@keyframes swing-in-top-fwd {
     0% {
         -webkit-transform: rotateX(-100deg);
         transform: rotateX(-100deg);
@@ -502,8 +493,19 @@ footer a {
         transform-origin: top;
         opacity: 1;
     }
-  }
-/* media queries - stack  */
+}
+
+/* Media queries - more to come to make it fully responsive  */
+@media only screen and (max-width: 1000px) {
+    .player1 div img, .player2 div img {
+        float: none;
+        margin: 0 auto;
+        width: 30%;
+        display: block;
+    }
+
+}
+
 @media only screen and (max-width: 600px) {
     .start-game-popup-title h1 {
         font-size: 40pt;
@@ -514,3 +516,4 @@ footer a {
     }
 
 }
+
