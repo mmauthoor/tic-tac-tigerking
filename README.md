@@ -17,6 +17,7 @@ Netflix for the endless amusement *Tiger King* has afforded me (and also for the
 
 - When a win/tie state is achieved, the page content would ideally not be clickable and would grey-out so only the win/tie pop-up message is clickable. 
 - Responsiveness needs to be improved so it can be played on all screen/device sizes - further media queries to come.
+- Ideally the board would be expandable beyond 3x3. Currently the JavaScript can handle this for row and column wins, but not for recognising diagonal wins as the diagonal cell coordinates are hard-coded. 
 - Further refactoring to clean up the CSS.
 
 ## Trimmings to add in the future

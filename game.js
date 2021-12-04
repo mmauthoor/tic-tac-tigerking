@@ -140,7 +140,7 @@ function declareWinner(winner) {
     } else if (winner === ".player2-cell") {
         player2WinPopup.classList.remove("hide");
         player2WinCounter++;
-        player2WinCountSpan.textContent = player1WinCounter;
+        player2WinCountSpan.textContent = player2WinCounter;
     }   
 }
 
