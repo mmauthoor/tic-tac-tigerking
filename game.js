@@ -5,9 +5,7 @@
 // acknowledge where animations and pics came from 
 
 // Need to:
-// do JE win state text
 // add images to sides and popups
-// style popups
 // add animated border to game status
 // favicon?
 
