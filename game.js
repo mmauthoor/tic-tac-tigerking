@@ -2,17 +2,10 @@
 
 // readme info - highly recommend using chrome/safari to view for animations. IE not recommended. 
 // Approach - in the wake of TK season 2, thought it would be fun to make a game encapsulating the chaotic energy and colourful characters. 
-// acknowledge where animations and pics came from 
+// acknowledge where animations and pics came from - Animista, Netflix
 
 // Need to:
-// add images to sides and popups
-// add animated border to game status
-// favicon?
-
-
-// Nice to haves: 
-// after 1 game, would go on to TK2 - Jeff Lowe v Tim Stark
-// sound effects
+// add images to sides
 
 // DOM objects
 let popupDiv = document.querySelector(".popup-div");
