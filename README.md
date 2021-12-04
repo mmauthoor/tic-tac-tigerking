@@ -1,6 +1,6 @@
 # tic-tac-tigerking
 
-Sit back and enjoy the chaotic energy of the colourful characters from Netflix's *Tiger King* through the classic game of tic tac toe. Who will win? Who will lose? Who will ride a jet ski into the sunset? Only your tic tac toe skills will decide! Inspired by season 2 of *Tiger King*, this game aims to deliver those mid-2000s online flash animation game vibes that we all remember from countless wasted hours in our teenage years. The design and CSS leans hard into the trashy, Vegas casino look.  
+Sit back and enjoy the chaotic energy of the colourful characters from Netflix's *Tiger King* through the classic game of tic tac toe. Who will win? Who will lose? Who will ride a jet ski into the sunset? Only your tic tac toe skills will decide! Inspired by season 2 of *Tiger King*, this game aims to deliver those mid-2000s online flash animation game vibes that we all remember from countless wasted hours in our teenage years. The design and CSS leans hard into the trashy, Vegas casino look. Play it [here](https://mmauthoor.github.io/tic-tac-tigerking/).
 
 
 ## Technologies & installation
