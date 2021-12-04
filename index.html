@@ -12,9 +12,12 @@
 </head>
 <body>
     <div class="popup-div start-game-popup">
-        <h1>Tic Tac <span>Tiger King</span></h1>
+        <div class="start-title">
+            <h1>Tic Tac <span class="start-title-span">Tiger King</span></h1>
+        </div>
+        
+        <!-- <img src="images/claw-mark1.jpg" alt="claw mark"> -->
         <h2>Welcome to the jungle!</h2>
-        <p>Your champions are: Player 1, the Tiger King. Player 2, the Cool Cat.</p>
         <h3>Are you ready for this wild ride?</h3>
         <button class="start-btn">Start</button>
     </div>
@@ -22,16 +25,18 @@
         <header>
             <span class="tictac-title-span">Tic Tac</span><span class="tk-title-span">Tiger King</span>
         </header>
-        <div class="game-status-div">Player 1 begins!</div>
+        <!-- <div class="game-status-div">Player 1 begins!</div> -->
         <main>
             <aside class="player1">
                 <img src="images/joe-floating-head.png" alt="joe exotic floating head">
                 <div class="player-name-div">
                     <img src="images/player1-token-icon.png" alt="player 1 token">
                     <span class="player-name-span">Player 1</span>The Tiger King
+                    <p>Won games: <span class="player1-win-count-span">0</span></p>
                 </div>
             </aside>
             <div class="gameboard-div">
+                <div class="game-status-div shake-horizontal">Player 1 begins!</div>
                 <div class="game-grid">
                     <div class="grid-cell" data-row="1" data-col="1"></div>
                     <div class="grid-cell" data-row="1" data-col="2"></div>
@@ -50,12 +55,14 @@
                 <div class="player-name-div">
                     <img src="images/player2-token-icon.png" alt="player 2 token">
                     <span class="player-name-span">Player 2</span>The Cool Cat
+                    <p>Won games: <span class="player2-win-count-span">0</span></p>
                 </div>
             </aside>
         </main>
         <footer>
             <a href="https://www.freepik.com/vectors/fashion">Fabulous animal print background artwork created by Vectorium – www.freepik.com</a>
-            <a href='https://www.freepik.com/vectors/background'>Tiger icons created by freepik – www.freepik.com</a>
+            <a href='https://www.freepik.com/vectors/background'>Claw mark vectors created by macrovector;
+                tiger icons created by freepik - www.freepik.com</a>
             <a href='https://www.freepik.com/vectors/paint'>Paint vector created by freepik – www.freepik.com</a>
         </footer>
         <div class="popup-div player1-win-popup swirl-in-fwd hide">

@@ -5,13 +5,9 @@
 // acknowledge where animations and pics came from 
 
 // Need to:
-// refactor to clean up code
-// choose better variable names
 // do JE win state text
 // add images to sides and popups
-// choose fonts
 // style popups
-// work out how to stop images being clickable when game over
 // add animated border to game status
 // favicon?
 
@@ -19,7 +15,6 @@
 // Nice to haves: 
 // after 1 game, would go on to TK2 - Jeff Lowe v Tim Stark
 // sound effects
-// jiggly popup boxes
 
 // DOM objects
 let popupDiv = document.querySelector(".popup-div");
@@ -34,8 +29,14 @@ let gameStatusDiv = document.querySelector(".game-status-div");
 let startBtn = document.querySelector(".start-btn");
 let restartBtns = document.querySelectorAll(".restart-btn");
 
-// Start game player status
+let player1WinCountSpan = document.querySelector(".player1-win-count-span"); 
+let player2WinCountSpan = document.querySelector(".player2-win-count-span"); 
+
+
+// Start game status
 let currentPlayer = "Player 1";
+let player1WinCounter = 0;
+let player2WinCounter = 0;
 
 function handlePlayerMove(event) {
     let chosenCell = event.target;
@@ -152,8 +153,12 @@ function isWin(playerCellClass, chosenCell) {
 function declareWinner(winner) {
     if (winner === ".player1-cell") {
         player1WinPopup.classList.remove("hide");
+        player1WinCounter++;
+        player1WinCountSpan.textContent = player1WinCounter;
     } else if (winner === ".player2-cell") {
         player2WinPopup.classList.remove("hide");
+        player2WinCounter++;
+        player2WinCountSpan.textContent = player1WinCounter;
     }   
 }
 
