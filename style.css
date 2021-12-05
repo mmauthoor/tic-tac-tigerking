@@ -38,6 +38,7 @@ body {
 .start-game-popup {
     margin: 10% auto;
     width: 60%;
+    position: relative;
 }
 
 .start-game-popup-title {
@@ -106,9 +107,9 @@ button:hover {
     color: #1B1212;
 }
 
-.start-game-popup button:hover, .popup-div .restart-btn:hover {
-    background-color: #E26A2C;
-    color: #FFF1AF;
+.start-game-popup button:hover, .restart-btn:hover {
+    background-color: #C04000;
+    color: linen;
 }
 
 .hide {
@@ -536,9 +537,30 @@ footer a {
         font-size: 40pt;
         margin: 0;
     }
+
     .start-title-span {
         font-size: 70pt;
     }
 
+    main {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 20px 10px;
+    }
+
+    aside {
+        width: 80%;
+        margin: 30px;
+    }
+
+    .player1 img, .player2 img {
+        width: 60%;
+    }
+
+    .player-info-div {
+        width: 60%;
+    }
+
+    
 }
 
