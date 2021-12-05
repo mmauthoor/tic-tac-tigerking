@@ -24,7 +24,6 @@ body {
     border-top-right-radius: 23px 130px;
     border-bottom-left-radius: 110px 19px;
     border-bottom-right-radius: 120px 24px;
-    width: 70%;
     min-height: 50%;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -34,6 +33,11 @@ body {
     left: 0;
     right: 0;
     text-align: center;
+}
+
+.start-game-popup {
+    margin: 10% auto;
+    width: 60%;
 }
 
 .start-game-popup-title {
@@ -172,7 +176,7 @@ header {
 main {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    margin: 40px 10px;
+    margin: 20px 10px;
 }
 
 .player1 img {
@@ -238,7 +242,7 @@ main {
 }
 
 .game-grid {
-    margin: 30px auto;
+    margin: 0 auto 20px;
     max-width: 500px;
     background-color: linen;
     display: grid;
@@ -293,14 +297,14 @@ main {
 }
 
 .player1-win-popup, .player2-win-popup, .tie-popup {
-    margin-top: 20%;
+    margin-top: 200px;
     font-size: 18pt;
-    min-height: 50%;
+    min-height: 60%;
     width: 50%;
 }
 
 .player1-win-popup img, .player2-win-popup img, .tie-popup img {
-    width: 50%;
+    width: 55%;
 } 
 
 .player1-win-popup h2, .player2-win-popup h2, .tie-popup h2 {
@@ -504,6 +508,13 @@ footer a {
 }
 
 /* Media queries - more to come to make it fully responsive  */
+@media only screen and (min-width: 1500px) {
+    main {
+        margin: 20px 5%;
+    }
+}
+
+
 @media only screen and (max-width: 1200px) {
     .start-game-popup-title h1 {
         margin: 0 1% 1%;
