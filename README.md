@@ -10,12 +10,11 @@ No installation of plug-ins etc. necessary, though I recommend viewing via Chrom
 
 ## Special thanks to
 
-Netflix for the endless amusement *Tiger King* has afforded me (and also for the beautiful images). Background and tiger icons by [Freepik](https://www.freepik.com/). Animations by [Animista](https://animista.net/). 
+Netflix for the endless amusement *Tiger King* has afforded me (and also for the beautiful images). Background and tiger icons by [Freepik](https://www.freepik.com/). Animations by [Animista](https://animista.net/). Huge thanks also to DT and Kasun for their faith in my CSS skills. :)
 
 
 ## Unsolved problems/fixes needed
 
-- When a win/tie state is achieved, the page content would ideally not be clickable and would grey-out so only the win/tie pop-up message is clickable. 
 - Responsiveness needs to be improved so it can be played on all screen/device sizes - further media queries to come.
 - Ideally the board would be expandable beyond 3x3. Currently the JavaScript can handle this for row and column wins, but not for recognising diagonal wins as the diagonal cell coordinates are hard-coded. 
 - Further refactoring to clean up the CSS.

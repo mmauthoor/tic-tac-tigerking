@@ -1,8 +1,5 @@
 // DOM objects
-let popupDiv = document.querySelector(".popup-div");
-let player1WinPopup = document.querySelector(".player1-win-popup");
-let player2WinPopup = document.querySelector(".player2-win-popup");
-let tiePopup = document.querySelector(".tie-popup");
+let startGamePopup = document.querySelector(".start-game-popup");
 
 let containerDiv = document.querySelector(".container-div");
 let gridCells = document.querySelectorAll(".grid-cell");
@@ -13,6 +10,10 @@ let restartBtns = document.querySelectorAll(".restart-btn");
 
 let player1WinCountSpan = document.querySelector(".player1-win-count-span"); 
 let player2WinCountSpan = document.querySelector(".player2-win-count-span"); 
+
+let player1WinModal = document.querySelector(".player1-win-modal");
+let player2WinModal = document.querySelector(".player2-win-modal");
+let tieModal = document.querySelector(".tie-modal");
 
 
 // Start game status
@@ -134,11 +135,11 @@ function isWin(playerCellClass, chosenCell) {
 function declareWinner(winner) {
     gameStatusDiv.textContent = "We have a winner!";
     if (winner === ".player1-cell") {
-        player1WinPopup.classList.remove("hide");
+        player1WinModal.style.display = "block";
         player1WinCounter++;
         player1WinCountSpan.textContent = player1WinCounter;
     } else if (winner === ".player2-cell") {
-        player2WinPopup.classList.remove("hide");
+        player2WinModal.style.display = "block";
         player2WinCounter++;
         player2WinCountSpan.textContent = player2WinCounter;
     }   
@@ -150,19 +151,19 @@ function isBoardFull() {
 }
 
 function isTie() {
-    tiePopup.classList.remove("hide");
+    tieModal.style.display = "block";
 }
 
 function handleStart() {
     containerDiv.classList.toggle("hide");
-    popupDiv.classList.toggle("hide");
+    startGamePopup.classList.toggle("hide");
 }
 
 function handleRestart() {
     gridCells.forEach(cell => cell.classList.remove("player1-cell", "player2-cell", "occupied", "winning-combo"));
-    player1WinPopup.classList.add("hide");
-    player2WinPopup.classList.add("hide");
-    tiePopup.classList.add("hide");
+    player1WinModal.style.display = "none";
+    player2WinModal.style.display = "none";
+    tieModal.style.display = "none";
     currentPlayer = "Player 1";
     gameStatusDiv.textContent = "Player 1, you go first!";
 }
