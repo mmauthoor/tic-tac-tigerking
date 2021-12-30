@@ -10,7 +10,7 @@ No installation of plug-ins etc. necessary, though I recommend viewing via Chrom
 
 ## Special thanks to
 
-Netflix for the endless amusement *Tiger King* has afforded me (and also for the beautiful images). Background and tiger icons by [Freepik](https://www.freepik.com/). Animations by [Animista](https://animista.net/). Huge thanks also to DT and Kasun for their faith in my CSS skills. :)
+Netflix for the endless amusement *Tiger King* has afforded me (and also for the beautiful images). Background and tiger icons by [Freepik](https://www.freepik.com/). Animations by [Animista](https://animista.net/). Huge thanks also to DT and Kasun for their faith in my CSS skills. 
 
 
 ## Unsolved problems/fixes needed
@@ -22,6 +22,5 @@ Netflix for the endless amusement *Tiger King* has afforded me (and also for the
 ## Trimmings to add in the future
 
 - A Round 2 easter egg based on Tiger King Season 2 that can only be accessed when players have a tie game. The players would swap out from Joe v Carole to the villains of season 2, Jeff Lowe and Tim Stark.
-- Wildcard random events to disrupt the game (e.g. a 10% chance that the psychic detective from season 2 will roll in and occupy one of the gameboard cells, preventing players from putting tokens there.
+- Wildcard random events to disrupt the game (e.g. a 10% chance that the psychic detective from season 2 will roll in and occupy one of the gameboard cells, preventing players from putting tokens there).
 - Sound effects (e.g. tiger roar) when players start/win a game
-- More animations (e.g. jiggly Joe/Carole heads) to amp up the chaotic energy.

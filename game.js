@@ -45,7 +45,7 @@ function handlePlayerMove(event) {
         }
     } else {
         gameStatusDiv.textContent = `There's a tiger in this cage already! Choose a different one, ${currentPlayer}!`;
-        }
+    }
 }
 
 function togglePlayers() {
