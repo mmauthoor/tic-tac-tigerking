@@ -33,7 +33,7 @@ function handlePlayerMove(event) {
             playerCellClass = ".player2-cell";
         }
         if (hasPlayerMade3Moves(playerCellClass)) {
-            if (isWin(playerCellClass, chosenCell)) {
+            if (isWin(playerCellClass)) {
                 declareWinner(playerCellClass);
             } else if (isBoardFull()) {
                 isTie();
@@ -67,69 +67,45 @@ function hasPlayerMade3Moves(playerCellClass) {
     return playerTotalCells.length >= 3;
 }
 
-function isRowOrColumnFull(chosenCell, playerTotalCells) {
-    let chosenCellRow = chosenCell.dataset.row;
-    let chosenCellCol = chosenCell.dataset.col;
-
-    let playerRowCounter = 0;
-    let playerColCounter = 0;
-
-    playerTotalCells.forEach(function(cell) {
-        if (cell.dataset.row === chosenCellRow) {
-            playerRowCounter++;
-        }
-        if (cell.dataset.col === chosenCellCol) {
-            playerColCounter++;
-        }
-    });
-    if (playerRowCounter === 3) {
-        playerTotalCells.forEach(function(cell) {
-            if (cell.dataset.row === chosenCellRow) {
-                cell.classList.add("winning-combo");
-            }
-        });
-        return true;
-    } else if (playerColCounter === 3) {
-        playerTotalCells.forEach(function(cell) {
-            if (cell.dataset.col === chosenCellCol) {
-                cell.classList.add("winning-combo");
-            }
-        });
-        return true;
-    }
-}
-
-function isDiagonalFull(playerTotalCells) {
-    let cellCoordinateArray = [];
-    playerTotalCells.forEach(function(cell) {
-        let cellCoordinates = cell.dataset.row + cell.dataset.col;
-        cellCoordinateArray.push(cellCoordinates); 
-        });
-        // Ideally identifying the diagonal win state would be based on the maths patterns in the grid rather than hard-coded like this, to allow the grid to be enlarged beyond 3x3. Might refactor at a later date. 
-    if (cellCoordinateArray.includes("11") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("33")) {
-        playerTotalCells.forEach(function(cell) {
-            if (cell.dataset.row + cell.dataset.col === "11" || cell.dataset.row + cell.dataset.col === "22" || cell.dataset.row + cell.dataset.col === "33") {
-                cell.classList.add("winning-combo");
-            }
-        });
-        return true;
-    } else if (cellCoordinateArray.includes("13") && cellCoordinateArray.includes("22") && cellCoordinateArray.includes("31")) {
-        playerTotalCells.forEach(function(cell) {
-            if (cell.dataset.row + cell.dataset.col === "13" || cell.dataset.row + cell.dataset.col === "22" || cell.dataset.row + cell.dataset.col === "31") {
-                cell.classList.add("winning-combo");
-            }
-        });
-        return true;
-    }
-}
-
-function isWin(playerCellClass, chosenCell) {
+function isWin(playerCellClass) {
     let playerTotalCells = document.querySelectorAll(playerCellClass); 
-    if (isRowOrColumnFull(chosenCell, playerTotalCells)) {
-        return true;
-    } else if (isDiagonalFull(playerTotalCells)) {
-        return true;
-    } 
+    let isWinConfirmed = false;
+    let winCombos = [
+        [0, 1, 2], 
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    let playerCellIds = [];
+    playerTotalCells.forEach(cell => {
+        playerCellIds.push(Number(cell.dataset.id));
+    });
+
+    for (let i = 0; i < winCombos.length; i++) {
+        let winCombo = winCombos[i];
+        let playerWinCombo = [];
+
+        winCombo.forEach(cellId => {
+            if (playerCellIds.includes(cellId)) {
+                playerWinCombo.push(Number(cellId));
+            }
+        });
+        if (playerWinCombo.length === 3) {
+            isWinConfirmed = true;
+            playerTotalCells.forEach(cell => {
+                if (playerWinCombo.includes(Number(cell.dataset.id))) {
+                    cell.classList.add("winning-combo");
+                }
+            });
+            break;
+        }
+    }
+    return isWinConfirmed;
 }
 
 function declareWinner(winner) {

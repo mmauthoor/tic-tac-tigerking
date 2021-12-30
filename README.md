@@ -5,8 +5,8 @@ Sit back and enjoy the chaotic energy of the colourful characters from Netflix's
 
 ## Technologies & installation
 
-Mostly straight JavaScript, HTML and CSS. Animations are by Animista. 
-No installation of plug-ins etc. necessary, though I recommend viewing via Chrome or Safari (or literally anything other than IE) to make the most of them. 
+Vanilla JavaScript, HTML and CSS. Animations are by Animista. 
+No installation of plug-ins etc. necessary, though I recommend viewing via Chrome or Safari (or  anything other than IE) to make the most of the animations. 
 
 ## Special thanks to
 
@@ -18,8 +18,9 @@ Netflix for the endless amusement *Tiger King* has afforded me (and also for the
 - Responsiveness needs to be improved so it can be played on all screen/device sizes - further media queries to come.
 - Ideally the board would be expandable beyond 3x3. Currently the JavaScript can handle this for row and column wins, but not for recognising diagonal wins as the diagonal cell coordinates are hard-coded. 
 - Further refactoring to clean up the CSS.
+- Further work on background image to ensure it loads in quickly.
 
-## Trimmings to add in the future
+## Areas of future work
 
 - A Round 2 easter egg based on Tiger King Season 2 that can only be accessed when players have a tie game. The players would swap out from Joe v Carole to the villains of season 2, Jeff Lowe and Tim Stark.
 - Wildcard random events to disrupt the game (e.g. a 10% chance that the psychic detective from season 2 will roll in and occupy one of the gameboard cells, preventing players from putting tokens there).
